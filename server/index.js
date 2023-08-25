@@ -4,12 +4,14 @@ const express = require('express')
 const sequelize = require('./db')
 const models = require('./models/models')
 const cors = require('cors') // sending requests from browser
+const router = require('./routes/index')
 
 const PORT = process.env.PORT || 5000
 
 const app = express()
 app.use(cors()) // sending requests from browser
 app.use(express.json()) // ability to parse json format
+app.use('/api', router)
 
 
 const start = async () => {
