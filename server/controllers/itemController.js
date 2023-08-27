@@ -5,7 +5,6 @@ const ApiError = require('../error/ApiError')
 
 class ItemController {
     async create(req, res, next) {
-
         try {
             let { name, price, brandId, typeId, info } = req.body // type name extraction
             const { img } = req.files
@@ -29,7 +28,6 @@ class ItemController {
             next(ApiError.badRequest(e.message))
             console.log(e);
         }
-
     }
 
     async getAll(req, res) {
