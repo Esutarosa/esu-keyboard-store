@@ -10,7 +10,14 @@ class ItemController {
             const { img } = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName)) // moving a file to a given folder
-            const item = await Item.create({ name, price, brandId, typeId, info, img: fileName })
+            const item = await Item.create({ 
+                name, 
+                price, 
+                brandId, 
+                typeId, 
+                info,
+                img: fileName 
+            })
 
             if (info) {
                 info = JSON.parse(info)
