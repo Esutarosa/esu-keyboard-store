@@ -18,11 +18,30 @@ class ItemController {
             next(ApiError.badRequest(e.message))
             console.log(e);
         }
-        
+
     }
 
     async getAll(req, res) {
+        const { brandId, typeId } = req.query // getting id from query string
+        let items
 
+        if (!brandId && !typeId) {
+            items = await Item.findAll()
+        }
+
+        if (brandId && !typeId) {
+            items = await Item.findAll({ where: { brandId } })
+        }
+
+        if (!brandId && typeId) {
+            items = await Item.findAll({ where: { typeId } })
+        }
+
+        if (brandId && typeId) {
+            items = await Item.findAll({ where: { brandId, typeId } })
+        }
+
+        return res.json(items)
     }
 
     async getOne(req, res) {
